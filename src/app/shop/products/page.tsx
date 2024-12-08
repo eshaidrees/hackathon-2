@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-export const Products = () => {
+export default function Products () {
 
 const ProductData = [
     {
@@ -115,4 +115,3 @@ const ProductData = [
   )
 }
 
-export default Products
