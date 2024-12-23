@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Homepage() {
   return (
@@ -55,6 +56,7 @@ export default function Homepage() {
         </div>
 
         {/* Products */}
+      
         <div className="flex flex-wrap gap-6 justify-center mt-10">
           {[
             { src: '/images/pro-1.png', title: 'Trenton modular sofa_3', price: 'Rs.25,000.00' },
@@ -70,7 +72,9 @@ export default function Homepage() {
           ))}
         </div>
         <div className="text-center mt-10">
+          <Link href="/productss">
           <button className="underline underline-offset-[15px]">View More</button>
+          </Link>
         </div>
       </div>
 
