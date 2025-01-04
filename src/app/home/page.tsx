@@ -72,7 +72,7 @@ export default function Homepage() {
           ))}
         </div>
         <div className="text-center mt-10">
-          <Link href="/productss">
+          <Link href="/products">
           <button className="underline underline-offset-[15px]">View More</button>
           </Link>
         </div>

@@ -31,10 +31,10 @@ export default function Header() {
 
     {/* Icons */}
     <div className="hidden sm:flex gap-6 p-2">
-      <FaRegUser className="w-6 h-5" />
+      <Link href="/Account"><FaRegUser className="w-6 h-5" /></Link>
       <IoSearchOutline className="w-6 h-6" />
       <FaRegHeart className="w-6 h-5" />
-      <RiShoppingCart2Line className="w-6 h-5" />
+      <Link href="/Cart"><RiShoppingCart2Line className="w-6 h-5" /></Link>
     </div>
 
     {/* Mobile Menu */}

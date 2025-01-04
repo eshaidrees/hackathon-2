@@ -74,16 +74,16 @@ export default function Contact() {
            <div className="w-full md:w-1/2 lg:w-1/3 ">
               <form className='flex flex-col gap-6 m-4'>
 
-              <label htmlFor="name" className="block mt-2 mb-1 text-left text-[#0c0b0b]">Your name</label>
+              <label className="block mt-2 mb-1 text-left text-[#0c0b0b]">Your name</label>
               <input type="text" id="name" name="name" placeholder="Abc" required className="w-full p-4 mb-3 border border-gray-300 rounded-lg" />
            
-              <label htmlFor="email" className="block mt-2 mb-1 text-left text-[#0c0b0b]">Email address</label>
+              <label className="block mt-2 mb-1 text-left text-[#0c0b0b]">Email address</label>
               <input type="email" id="email" name="email" placeholder="Abc@def.com" required className="w-full p-4 mb-3 border border-gray-300 rounded-lg" />
 
-              <label htmlFor="subject" className="block mt-2 mb-1 text-left text-[#0c0b0b]">Subject</label>
+              <label className="block mt-2 mb-1 text-left text-[#0c0b0b]">Subject</label>
               <input type="text" id="text" name="text" placeholder="This is an optional" className="w-full p-4 mb-3 border border-gray-300 rounded-lg" />
            
-              <label htmlFor="message" className="block mt-2 mb-1 text-left text-[#0c0b0b]">Message</label>
+              <label className="block mt-2 mb-1 text-left text-[#0c0b0b]">Message</label>
               <textarea id="message" name="message" placeholder="Hi! i'd like to ask about" required className="w-full p-5 mb-3 border border-gray-300 rounded-lg"></textarea>
            
               <button type="submit" className="border-2 border-black text-center p-2 md:mr-52 text-black hover:bg-gray-300 rounded-xl">
