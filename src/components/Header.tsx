@@ -7,8 +7,6 @@ import { FaRegHeart } from "react-icons/fa";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa6";
 
-
-
 export default function Header() {
   return (
 

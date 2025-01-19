@@ -1,9 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import { FaAngleRight } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa6";
-import { FaClock } from "react-icons/fa6";
+import { FaPhone , FaClock , FaAngleRight } from "react-icons/fa6";
 
 
 export default function Contact() {

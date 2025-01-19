@@ -1,8 +1,10 @@
 "use client";
 
 import { useParams } from 'next/navigation';
-import { FaFacebookF , FaTwitter , FaLinkedinIn , FaHeart } from "react-icons/fa";
+import { FaFacebookF , FaTwitter , FaLinkedinIn , FaHeart, FaMinus, FaPlus } from "react-icons/fa";
 import { ProductsData } from '../../data';
+import { useCart} from '@/context/CartContext';
+import { useState } from 'react';
 
 const ProductDetail = () => {
   const params = useParams(); // Use `useParams` to get the dynamic route parameter
@@ -10,6 +12,24 @@ const ProductDetail = () => {
 
   // Find the specific product by ID
   const product = ProductsData.find((item) => item.id === id);
+  
+  const { addToCart } = useCart()
+  const [ count , setCount ] = useState(1)
+
+  // Handle add to cart
+  const HandleAddToCart = () => {
+   if(product){
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: count ,
+    })
+    alert("Product added to cart!");
+   }
+  }
+
 
   if (!product) {
     return <div className="text-center p-5 text-red-500">Product not found!</div>;
@@ -133,10 +153,12 @@ const ProductDetail = () => {
               </div>
             </div>
             <div className="flex  pb-10 border-b-2 border-gray-100 mb-5">
-                <span className="flex text-black bg-white border-2 border-gray-300 py-2 px-6 focus:outline-none hover:bg-slate-200 rounded-lg">
-                  - 1 +
-                </span>
-                <button className="flex ml-auto text-black bg-white border-2 border-gray-500 py-2 px-6 focus:outline-none hover:bg-slate-200 rounded-lg">
+             <div className="flex gap-4 text-xl text-black bg-white border-2 border-gray-300 py-2 px-6 focus:outline-none hover:bg-slate-200 rounded-lg">
+                 <button onClick={() => setCount(count > 1 ? count - 1 :1)}><FaMinus className='size-3  text-slate-600 hover:text-black'/></button>
+                 {count}
+                  <button onClick={() => setCount(count + 1)}><FaPlus className='size-3 text-slate-600 hover:text-black' /></button>
+                </div>
+                <button onClick={HandleAddToCart} className="flex ml-auto text-black bg-white border-2 border-gray-500 py-2 px-6 focus:outline-none hover:bg-slate-200 rounded-lg">
                   Add To Cart
                 </button>
                 <button className="rounded-full w-10 h-10 bg-red-100 p-0 border-0 hover:text-red-500 inline-flex items-center justify-center text-red-400 ml-4">

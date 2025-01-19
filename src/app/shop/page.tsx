@@ -47,7 +47,7 @@ export default function page() {
        </div>
 
        {/* Products */}
-       <div className='h-full w-full max-w-[1440px]'>
+       <div className='w-full h-auto'>
          <Products />
        </div>
     </>

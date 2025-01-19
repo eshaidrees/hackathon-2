@@ -1,17 +1,28 @@
+"use client";
+
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link';
+import { useCart } from "@/context/CartContext";
 import { FaAngleRight } from "react-icons/fa6";
 import { RiDeleteBin7Fill } from "react-icons/ri";
-import { ProductsData } from '../products/data';
 
-export default function Cart() {
-  const productadd = ProductsData.filter((product) => 
-    ['1', '2', '3'].includes(product.id)
-)
-  return (
-    <div> 
+const CartPage = () => {
+  const { cart, removeFromCart } = useCart();
+
+  const calculateTotal = () => {
+    return cart.reduce((total , item) => total + item.price * item.quantity, 0)
+  }
+
+  const handleRemove = (id:string) => {
+    removeFromCart(id);
+    alert("Item removed from cart!");
+  };
+
+  return ( 
+        <div className='w-full h-auto'>
          <div className='relative w-full h-auto p-6'>
-           <div
+          <div
               className='absolute inset-0 '
               style={{
                 backgroundImage: "url('images/bg-2.jpeg')",
@@ -23,16 +34,26 @@ export default function Cart() {
               }}
               >  
             </div>
-    
-             <div className='relative flex flex-col justify-center items-center max-w-full mx-auto h-[202px] my-[50px]'>
+            <div className='relative flex flex-col justify-center items-center max-w-full mx-auto h-[202px] my-[50px]'>
                 <Image src="/images/logo.png" alt='logo' width="100" height="100"/> 
                 <h1 className='text-5xl font-bold p-2'>Cart</h1>
                 <p className='flex gap-1 py-2'>Home <FaAngleRight className='m-1'/> 
                 <span className='text-gray-700'>Cart</span></p>
              </div>
-        </div> 
+          </div> 
 
-      <div className='flex flex-col lg:flex-row justify-between gap-6 p-4'> 
+      <div className="container mx-auto pb-10">
+       {cart.length === 0 ? (
+         <p className="text-center text-gray-600 p-6">
+           Your cart is empty. <br />
+           <Link href="/products" className="text-blue-500 underline hover:text-blue-600">
+             Shop now
+           </Link>
+         </p>
+       ) : (
+
+       <>  
+       <div className='flex flex-col lg:flex-row justify-between gap-6 p-4'> 
         {/* Product List */}
         <div className="w-full lg:w-2/3 bg-white shadow-md p-4">
           <ul className="flex justify-between gap-4 py-4 text-sm bg-orange-50 p-3">
@@ -42,7 +63,7 @@ export default function Cart() {
             <li className="flex-1 text-center">Subtotal</li>
           </ul>
             {/* Cart Items*/}
-            {productadd.map((product) => (
+            {cart.map((product) => (
             <div
              key={product.id}
              className="flex flex-wrap items-center justify-between gap-4 py-4 border-b border-gray-200"
@@ -55,10 +76,13 @@ export default function Cart() {
              {product.price}
               </p>
              <p className="text-center text-sm px-2 border border-gray-300 rounded">
-              1
+              {product.quantity}
              </p>
-             <p className="flex-1 text-center text-sm">Rs.250,000,00</p>
-             <RiDeleteBin7Fill className="text-red-500 cursor-pointer" />
+             <p className="flex-1 text-center text-sm">{product.price * product.quantity}
+             </p>
+              <button onClick={() => handleRemove(product.id)}>
+              <RiDeleteBin7Fill className="text-red-500 cursor-pointer" />
+              </button>
             </div>
 
            ))}
@@ -69,17 +93,23 @@ export default function Cart() {
           <h1 className="text-xl font-bold mb-4">Cart Totals</h1>
           <p className="flex justify-between text-sm text-gray-600 mb-2">
             <span>Subtotal</span>
-            <span>Rs.250,000,00</span>
+            <span>Rs.{calculateTotal()}</span>
           </p>
           <p className="flex justify-between text-sm text-yellow-500 mb-4">
             <span>Total</span>
-            <span>Rs.250,000,00</span>
+            <span>Rs.{calculateTotal()}</span>
           </p>
           <button className="w-full text-center bg-black text-white hover:bg-yellow-400 px-4 py-2 rounded-lg">
             Check Out
           </button>
         </div>
         </div>
-      </div>
-  )
-}
+        </>
+        
+      )}
+    </div>
+    </div>
+    
+  );
+};
+export default CartPage
