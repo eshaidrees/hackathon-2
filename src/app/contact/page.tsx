@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaPhone , FaClock , FaAngleRight } from "react-icons/fa6";
+import Features from '@/components/Features';
 
 
 export default function Contact() {
@@ -91,6 +92,7 @@ export default function Contact() {
          </div>
        </div>
     </div>
+    <Features/>
   </>
   )
 }

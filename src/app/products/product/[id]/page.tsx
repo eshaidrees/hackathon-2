@@ -5,6 +5,7 @@ import { FaFacebookF , FaTwitter , FaLinkedinIn , FaHeart, FaMinus, FaPlus } fro
 import { ProductsData } from '../../data';
 import { useCart} from '@/context/CartContext';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const ProductDetail = () => {
   const params = useParams(); // Use `useParams` to get the dynamic route parameter
@@ -43,6 +44,8 @@ const ProductDetail = () => {
             alt="ecommerce"
             className="bg-orange-100 lg:w-1/2 w-full lg:h-[500px] h-64 rounded"
             src={product.image}
+            width={50}
+            height={50}
             
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

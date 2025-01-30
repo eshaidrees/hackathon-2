@@ -5,6 +5,7 @@ import { PiCirclesFourFill } from "react-icons/pi";
 import { BsViewList } from "react-icons/bs";
 import { AiOutlineControl } from "react-icons/ai";
 import Products from '../products/page';
+import Features from '@/components/Features';
 
 export default function page() {
   return (
@@ -31,20 +32,6 @@ export default function page() {
             <span className="text-gray-700">Shop</span>
           </p> </div>
     </div> 
-
-    <div className="flex flex-col md:flex-row justify-between items-center h-auto md:h-[100px] w-full max-w-[1440px] bg-[#FAF4F4] px-6 md:px-20 py-6 md:py-10 gap-4">
-    <div className="flex flex-wrap gap-4 items-center">
-    <AiOutlineControl className='m-1'/>
-            <p>Filter</p>
-           <PiCirclesFourFill className='m-1'/>
-           <BsViewList className='m-1'/>
-           <p>Showing 1-16 of 32 result</p>
-        </div>
-        <div className="flex flex-wrap gap-4 items-center">
-            <p>Show <span className='bg-white p-2 text-gray-400'>16</span> </p>
-            <p>Short by <span className='bg-white p-3 text-gray-400'>Default</span></p>
-        </div>
-       </div>
 
        {/* Products */}
        <div className='w-full h-auto'>

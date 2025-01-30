@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { FaAngleRight } from "react-icons/fa6";
+import Features from '@/components/Features';
 
 export default function MyAccount() {
   return (
@@ -72,6 +73,8 @@ export default function MyAccount() {
              
             </form>
          </div>
+         <Features/>
+
     </div>
   )
 }
