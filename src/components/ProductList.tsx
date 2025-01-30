@@ -90,7 +90,7 @@ return (
     {/* Product Grid */}
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 m-2 sm:m-4">
       {sortedProducts.map(({ _id, name, description, price, image }) => (
-        <Link href={`/products/${_id}`} key={_id}>
+        <Link href={`/products/product/${_id}`} key={_id}>
           <div className="bg-white rounded-lg shadow-md flex flex-col items-center h-full transition-transform transform hover:scale-105 hover:shadow-lg p-4 sm:p-6">
             {/* Product Image */}
             {image && (

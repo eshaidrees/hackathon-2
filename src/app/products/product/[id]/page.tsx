@@ -4,28 +4,60 @@ import { useParams } from 'next/navigation';
 import { FaFacebookF , FaTwitter , FaLinkedinIn , FaHeart, FaMinus, FaPlus } from "react-icons/fa";
 import { ProductsData } from '../../data';
 import { useCart} from '@/context/CartContext';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import Image from 'next/image';
+import { Product } from '../../../../../types/products';
+import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 
-const ProductDetail = () => {
-  const params = useParams(); // Use `useParams` to get the dynamic route parameter
+export default function ProductDetail() {
+  // const params = useParams(); // Use `useParams` to get the dynamic route parameter
+  // const { id } = params;  
+
+  // // Find the specific product by ID
+  // const product = ProductsData.find((item) => item.id === id);
+  const params = useParams();
   const { id } = params;
-
-  // Find the specific product by ID
-  const product = ProductsData.find((item) => item.id === id);
-  
+   
   const { addToCart } = useCart()
   const [ count , setCount ] = useState(1)
 
+  const [product, setProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const query = `*[_type == "product"]{
+        _id,
+        name,
+        description,
+        price,
+        image {
+          asset -> {
+            ref
+          }
+        }
+      }`;
+      const data: Product[] = await client.fetch(query);
+      const findMatchProduct = data.find((item) => item._id === params.id);
+      setProduct(findMatchProduct || null);
+    };
+
+    fetchData();
+  }, [id]);
+
+ 
   // Handle add to cart
   const HandleAddToCart = () => {
-   if(product){
+    if(product){
+    
     addToCart({
-      id: product.id,
+      _id: product._id,
       name: product.name,
       price: product.price,
       image: product.image,
       quantity: count ,
+      _type: product._type, 
+      category: product.category, 
     })
     alert("Product added to cart!");
    }
@@ -40,14 +72,17 @@ const ProductDetail = () => {
       <section className="text-gray-600 body-font overflow-hidden">
        <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
-           <img
-            alt="ecommerce"
-            className="bg-orange-100 lg:w-1/2 w-full lg:h-[500px] h-64 rounded"
-            src={product.image}
-            width={50}
-            height={50}
-            
-            />
+        {product.image?.asset?._ref && (
+            <div className="lg:w-1/2 w-full">
+              <Image
+                alt={product.name}
+                className="bg-orange-100 lg:w-1/2 w-full lg:h-[500px] h-64 rounded"
+                src={urlFor(product.image.asset._ref).url()} // Use urlFor to get the image URL
+                width={500} 
+                height={500}
+              />
+            </div>
+          )}
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
               {product.name}
@@ -188,6 +223,5 @@ const ProductDetail = () => {
     );
   
 }
-export default ProductDetail;
 
 

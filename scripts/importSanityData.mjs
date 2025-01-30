@@ -3,11 +3,11 @@ import fetch from 'node-fetch';
 
 // Initialize Sanity client
 const client = createClient({
-  projectId: "dzuo6r1z",
-  dataset: "production",
+  projectId: NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: NEXT_PUBLIC_SANITY_DATASET,
   useCdn: false,
   apiVersion: '2025-01-13',
-  token: "skLxEPP4vmaiOxoQL1mjWx4NybiqAJrZYfJk0Zd9ZBRhcXbymcuz4QlQ8rM71lRrYtxuJtaqAEjIQfrAlzGZgrId1kRiepLdvorfguoA4LzY1LMVrH8ZE5x0VhAKFWOgIo4XRQ7lZGtD4lJHWX52fKHikGuyDhoMzGyxqZ33QBh7c5x1OTcS", // Replace with your Sanity token
+  token: SANITY_API_TOKEN,
 });
 
 // Function to upload an image to Sanity
@@ -51,7 +51,7 @@ async function uploadProduct(product) {
             _ref: imageId,
           },
         },
-        price: parseFloat(product.price), // Ensure the price is a number
+        price: parseFloat(product.price), 
         description: product.description,
         discountPercentage: product.discountPercentage,
         isFeaturedProduct: product.isFeaturedProduct,
