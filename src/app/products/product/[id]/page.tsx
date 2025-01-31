@@ -16,7 +16,6 @@ export default function ProductDetail() {
   // // Find the specific product by ID
   // const product = ProductsData.find((item) => item.id === id);
   const params = useParams();
-  const { id } = params;
    
   const { addToCart } = useCart()
   const [ count , setCount ] = useState(1)
