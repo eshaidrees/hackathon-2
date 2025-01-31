@@ -8,6 +8,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import Features from "@/components/Features";
 import { useRouter } from "next/navigation";
+import { urlFor } from "@/sanity/lib/image";
 
 export const CartPage = () => {
   const router = useRouter();
@@ -68,50 +69,69 @@ export const CartPage = () => {
         ) : (
           <>
             <div className="flex flex-col lg:flex-row justify-between gap-6 p-4">
-              {/* Product List */}
-              <div className="w-full lg:w-2/3 bg-white shadow-md p-4">
-                <ul className="flex justify-between gap-4 py-4 text-sm bg-orange-50 p-3">
-                  <li className="flex-1 text-center">Product</li>
-                  <li className="flex-1 text-center">Price</li>
-                  <li className="flex-1 text-center">Quantity</li>
-                  <li className="flex-1 text-center">Subtotal</li>
-                </ul>
-                {/* Cart Items */}
-                {cart.map((product) => (
-                  <div
-                    key={product.id}
-                    className="flex flex-wrap items-center justify-between gap-4 py-4 border-b border-gray-200"
-                  >
-                    <Image
-                      src={product.image}
-                      alt="product image"
-                      width={100}
-                      height={100}
-                      className="bg-yellow-50 rounded-lg"
-                    />
-                    <p className="flex-1 text-center text-sm text-gray-400">{product.name}</p>
-                    <p className="flex-1 text-center text-sm text-gray-400">Rs.{product.price}</p>
-                    <p className="text-center text-sm px-2 border border-gray-300 rounded">{product.quantity}</p>
-                    <p className="flex-1 text-center text-sm">
-                      Rs.{product.price * product.quantity}
-                    </p>
-                    <button onClick={() => handleRemove(product.id)}>
-                      <RiDeleteBin7Fill className="text-red-500 cursor-pointer" />
-                    </button>
-                  </div>
-                ))}
-              </div>
+  {/* Product List */}
+  <div className="w-full lg:w-2/3 bg-white shadow-md p-4">
+    {/* Table Header */}
+    <ul className="grid grid-cols-5 text-sm bg-orange-50 p-3 font-bold">
+      <li className="text-center">Product</li>
+      <li className="text-center">Price</li>
+      <li className="text-center">Quantity</li>
+      <li className="text-center">Subtotal</li>
+    </ul>
+
+    {/* Cart Items */}
+    {cart.map((product) => (
+      <div
+        key={product._id}
+        className="grid grid-cols-5 items-center py-4 border-b border-gray-200 text-sm"
+      >
+        {/* Product Image */}
+        <div className="flex gap-4 items-center justify-center">
+          {product.image && (
+            <Image
+              alt={product.name}
+              className="bg-orange-100"
+              src={urlFor(product.image).url()}
+              width={60}
+              height={60}
+            />
+          )}
+          <p className="text-sm text-gray-500">{product.name}</p>
+        </div>
+
+
+        {/* Price */}
+        <p className="text-center text-gray-400">Rs. ${product.price}</p>
+
+        {/* Quantity */}
+        <p className="text-center text-gray-400">{product.quantity}</p>
+
+        {/* Subtotal */}
+        <p className="text-center font-medium">
+          Rs. ${product.price * product.quantity}
+        </p>
+
+        {/* Delete Button */}
+        <button
+          onClick={() => handleRemove(product._id)}
+          className="text-red-500 flex justify-center"
+        >
+          <RiDeleteBin7Fill className="cursor-pointer text-lg" />
+        </button>
+      </div>
+    ))}
+  </div>
 
               {/* Cart Totals */}
               <div className="w-full lg:w-1/4 h-52 lg:mx-10 px-10 bg-orange-50 shadow-md p-4 rounded-lg">
                 <h1 className="text-xl font-bold mb-4">Cart Totals</h1>
                 <p className="flex justify-between text-sm text-gray-600 mb-2">
                   <span>Subtotal</span>
-                  <span>Rs.{calculateTotal()}</span>
+                  <span>Rs. ${calculateTotal()}</span>
                 </p>
                 <p className="flex justify-between text-sm text-yellow-500 mb-4">
                   <span>Total</span>
-                  <span>Rs.{calculateTotal()}</span>
+                  <span>Rs. ${calculateTotal()}</span>
                 </p>
                 <button
                   onClick={handleCheckout}

@@ -2,7 +2,6 @@
 
 import { useParams } from 'next/navigation';
 import { FaFacebookF , FaTwitter , FaLinkedinIn , FaHeart, FaMinus, FaPlus } from "react-icons/fa";
-import { ProductsData } from '../../data';
 import { useCart} from '@/context/CartContext';
 import { useState , useEffect } from 'react';
 import Image from 'next/image';
@@ -31,11 +30,8 @@ export default function ProductDetail() {
         name,
         description,
         price,
-        image {
-          asset -> {
-            ref
-          }
-        }
+          "image": image.asset->_id
+
       }`;
       const data: Product[] = await client.fetch(query);
       const findMatchProduct = data.find((item) => item._id === params.id);
@@ -72,16 +68,15 @@ export default function ProductDetail() {
       <section className="text-gray-600 body-font overflow-hidden">
        <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
-        {product.image?.asset?._ref && (
-            <div className="lg:w-1/2 w-full">
+        
+        {product.image && (
               <Image
                 alt={product.name}
                 className="bg-orange-100 lg:w-1/2 w-full lg:h-[500px] h-64 rounded"
-                src={urlFor(product.image.asset._ref).url()} // Use urlFor to get the image URL
-                width={500} 
-                height={500}
+                src={urlFor(product.image).url()} // Use urlFor to get the image URL
+                width={400} 
+                height={400}
               />
-            </div>
           )}
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">

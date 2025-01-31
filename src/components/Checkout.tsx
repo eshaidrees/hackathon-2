@@ -6,25 +6,85 @@ import { FaAngleRight } from "react-icons/fa6";
 import Features from "@/components/Features";
 
 const Checkout = () => {
+  // const [cart, setCart] = useState<any[]>([]);
+  // const [total, setTotal] = useState(0);
+  // const [paymentMethod, setPaymentMethod] = useState<string>("");
+
+  // // useEffect(() => {
+  // //   const savedCart = localStorage.getItem("/Cart");
+  // //   if (savedCart) {
+  // //     const parsedCart = JSON.parse(savedCart);
+  // //     setCart(parsedCart);
+  // //     // calculateTotal(parsedCart);
+  // //   }
+  // // }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const savedCart = localStorage.getItem("/Cart");
+  //     if (savedCart) {
+  //       setCart(JSON.parse(savedCart));
+  //     }
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   calculateTotal(cart)
+  // }, [cart])
+
+  // const calculateTotal = (cartItems: any[]) => {
+  //   if (cartItems.length === 0) return;
+  //   setTotal(cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0));
+  // };
+
+  // // const calculateTotal = (cartItems: any[]) => {
+  // //   const totalAmount = cartItems.reduce(
+  // //     (acc, item) => acc + item.price * item.quantity,
+  // //     0
+  // //   );
+  // //   setTotal(totalAmount);
+  // // };
+
+  // const handlePaymentMethodChange = (method: string) => {
+  //   setPaymentMethod(method);
+  // };
+
+  // const handleSubmit = () => {
+  //   if (!paymentMethod) {
+  //     alert("Please select a payment method");
+  //     return;
+  //   }
+
+  //   alert("Order placed successfully!");
+  //   // Clear cart after placing order
+  //   setCart([]);
+  //   localStorage.removeItem("/Cart");
+  // };
+  
   const [cart, setCart] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
 
   useEffect(() => {
-    const savedCart = localStorage.getItem("/Cart");
-    if (savedCart) {
-      const parsedCart = JSON.parse(savedCart);
-      setCart(parsedCart);
-      calculateTotal(parsedCart);
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("/Cart");
+      if (savedCart) {
+        const parsedCart = JSON.parse(savedCart);
+        setCart(parsedCart);
+        calculateTotal(parsedCart); // Ensure total is calculated immediately
+      }
     }
   }, []);
 
+  useEffect(() => {
+    calculateTotal(cart);
+  }, [cart]);
+
   const calculateTotal = (cartItems: any[]) => {
-    const totalAmount = cartItems.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-    setTotal(totalAmount);
+    if (!cartItems.length) {
+      setTotal(0); // Reset total if cart is empty
+      return;
+    }
+    setTotal(cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0));
   };
 
   const handlePaymentMethodChange = (method: string) => {
@@ -38,11 +98,12 @@ const Checkout = () => {
     }
 
     alert("Order placed successfully!");
-    // Clear cart after placing order
+
+    // Clear cart and reset total
     setCart([]);
+    setTotal(0);
     localStorage.removeItem("/Cart");
   };
-  
 
   return (
     <>
@@ -122,16 +183,16 @@ const Checkout = () => {
         <div className='flex flex-col gap-6 m-4 w-1/3 text-left'>
           <div className='flex justify-between text-left border-b-2'>
             <div className='flex flex-col gap-6'>
-              <span className='flex justify-around gap-28'>
+              <div className='flex justify-around gap-28'>
                 <h1 className='text-2xl font-bold '>Product</h1>
                 <h1 className='text-2xl font-bold '>Subtotal</h1>
-              </span>
+              </div>
 
               {cart.map((item) => (
-                <div key={item.id} className='flex justify-between'>
-                  <p className='text-sm text-gray-400'>{item.name}</p>
+                <div key={item._id} className='flex justify-between'>
+                  <p className='text-sm text-gray-400 font- p-2'>{item.name}</p>
                   <span>
-                  <p className='text-sm '>Rs: {item.price * item.quantity}</p>
+                  <p className='text-sm '>Rs: ${item.price * item.quantity}</p>
                   <p className='text-sm '>Qty: {item.quantity}</p>
                   </span>
                 </div>
@@ -139,9 +200,9 @@ const Checkout = () => {
 
               <span className='flex justify-between'>
                 <p className='text-sm '>Total</p>
-                <p className='text-md font-semibold text-yellow-600 '>Rs: {total}</p>
+                <p className='text-xl font-semibold text-yellow-600 '>Rs: ${total}</p>
               </span>
-            </div>
+            </div>  
           </div>
 
           {/* Payment Method */}
