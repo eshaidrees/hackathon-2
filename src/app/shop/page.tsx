@@ -1,11 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
 import { FaAngleRight } from "react-icons/fa6";
-import { PiCirclesFourFill } from "react-icons/pi";
-import { BsViewList } from "react-icons/bs";
-import { AiOutlineControl } from "react-icons/ai";
 import Products from '../products/page';
-import Features from '@/components/Features';
 
 export default function page() {
   return (

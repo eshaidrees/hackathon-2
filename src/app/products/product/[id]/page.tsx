@@ -39,7 +39,7 @@ export default function ProductDetail() {
     };
 
     fetchData();
-  }, [id]);
+  }, [params.id]);
 
  
   // Handle add to cart

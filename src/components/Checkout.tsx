@@ -5,62 +5,16 @@ import Image from "next/image";
 import { FaAngleRight } from "react-icons/fa6";
 import Features from "@/components/Features";
 
+interface CartItem {
+  _id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 const Checkout = () => {
-  // const [cart, setCart] = useState<any[]>([]);
-  // const [total, setTotal] = useState(0);
-  // const [paymentMethod, setPaymentMethod] = useState<string>("");
-
-  // // useEffect(() => {
-  // //   const savedCart = localStorage.getItem("/Cart");
-  // //   if (savedCart) {
-  // //     const parsedCart = JSON.parse(savedCart);
-  // //     setCart(parsedCart);
-  // //     // calculateTotal(parsedCart);
-  // //   }
-  // // }, []);
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const savedCart = localStorage.getItem("/Cart");
-  //     if (savedCart) {
-  //       setCart(JSON.parse(savedCart));
-  //     }
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   calculateTotal(cart)
-  // }, [cart])
-
-  // const calculateTotal = (cartItems: any[]) => {
-  //   if (cartItems.length === 0) return;
-  //   setTotal(cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0));
-  // };
-
-  // // const calculateTotal = (cartItems: any[]) => {
-  // //   const totalAmount = cartItems.reduce(
-  // //     (acc, item) => acc + item.price * item.quantity,
-  // //     0
-  // //   );
-  // //   setTotal(totalAmount);
-  // // };
-
-  // const handlePaymentMethodChange = (method: string) => {
-  //   setPaymentMethod(method);
-  // };
-
-  // const handleSubmit = () => {
-  //   if (!paymentMethod) {
-  //     alert("Please select a payment method");
-  //     return;
-  //   }
-
-  //   alert("Order placed successfully!");
-  //   // Clear cart after placing order
-  //   setCart([]);
-  //   localStorage.removeItem("/Cart");
-  // };
   
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [total, setTotal] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState<string>("");
 
@@ -79,7 +33,7 @@ const Checkout = () => {
     calculateTotal(cart);
   }, [cart]);
 
-  const calculateTotal = (cartItems: any[]) => {
+  const calculateTotal = (cartItems: CartItem[]) => {
     if (!cartItems.length) {
       setTotal(0); // Reset total if cart is empty
       return;
