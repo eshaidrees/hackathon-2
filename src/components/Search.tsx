@@ -24,7 +24,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         {/* Input Field */}
         <input
           type="text"
-          placeholder="Search... through categories"
+          placeholder="Search categories...."
           value={query}
           onChange={handleInputChange}
           className="w-full bg-transparent border-none outline-none text-gray-800 placeholder-gray-500"

@@ -21,7 +21,7 @@ export default function page() {
      </div>
 
      <div className="relative flex flex-col justify-center items-center w-full max-w-[454px] mx-auto my-8 md:my-16 text-center">
-     <Image src="/images/logo.png" alt='logo' width="100" height="100"/> 
+          <Image src="/images/logo.png" alt="logo" width={90} height={90} />
      <h1 className="text-3xl md:text-5xl font-bold py-4">Shop</h1>
           <p className="flex items-center gap-1 text-sm md:text-base">
             Home <FaAngleRight className="mx-1" />

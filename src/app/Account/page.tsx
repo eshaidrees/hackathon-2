@@ -21,7 +21,7 @@ export default function MyAccount() {
                 </div>
         
                <div className='relative flex flex-col justify-center items-center max-w-full mx-auto h-[202px] my-[50px]'>
-                  <Image src="/images/logo.png" alt='logo' width="100" height="100"/> 
+          <Image src="/images/logo.png" alt="logo" width={90} height={90} />
                   <h1 className='text-5xl font-bold p-2'>My Account</h1>
                   <p className='flex gap-1 py-2'>Home <FaAngleRight className='m-1'/> 
                   <span className='text-gray-700'>My Account</span></p>

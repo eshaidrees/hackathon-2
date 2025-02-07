@@ -1,5 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+
 export default function HeroSection() {
   return (
     <>
@@ -9,7 +11,7 @@ export default function HeroSection() {
               {/* Text */}
               <div className="w-full lg:w-[440px] lg:h-[256px] p-10 mt-20 lg:mt-[240px] lg:ml-[300px] text-center lg:text-left">
                 <h1 className="text-4xl lg:text-5xl">Rocket single seater</h1>
-                <p className="mt-6 underline underline-offset-8">Shop Now</p>
+               <Link href={"/products"}> <p className="mt-6 underline underline-offset-8">Shop Now</p></Link>
               </div>
               {/* Image */}
               <div className="w-full lg:w-[700px] lg:h-[600px] lg:mr-20">

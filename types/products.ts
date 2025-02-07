@@ -13,5 +13,6 @@ export interface Product {
     description? : string;
     category : string;
     quantity : number;
+    stockLevel : number;
 
 }
