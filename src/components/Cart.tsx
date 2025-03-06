@@ -102,7 +102,7 @@ export const CartPage = () => {
   {/* Product List */}
   <div className="w-full lg:w-2/3 bg-white shadow-md p-4">
     {/* Table Header */}
-    <ul className="grid grid-cols-5 text-sm bg-orange-50 p-3 font-bold">
+    <ul className="hidden md:grid grid-cols-5 text-sm bg-orange-50 p-3 font-bold">
       <li className="text-center">Product</li>
       <li className="text-center">Price</li>
       <li className="text-center">Quantity</li>
@@ -113,7 +113,7 @@ export const CartPage = () => {
     {cartItems.map((product) => (
       <div
         key={product._id}
-        className="grid grid-cols-5 items-center py-4 border-b border-gray-200 text-sm"
+        className="grid grid-cols-1 gap-4 md:grid-cols-5 items-center py-4 border-b border-gray-200 text-sm"
       >
         {/* Product Image */}
         <div className="flex gap-4 items-center justify-center">
